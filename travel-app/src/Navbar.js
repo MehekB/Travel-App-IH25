@@ -4,7 +4,10 @@ import './Navbar.css';
 function Navbar() {
   return (
     <nav className="navbar">
-      <h1 className="logo">Travel App</h1>
+      <div className="logo-container">
+        <img src="/ziptrip.png" alt="ZipTrip Logo" className="logo-image" />
+        <h1 className="logo">ZipTrip</h1>
+      </div>
       <ul className="nav-links">
         <li><Link to="/">Home</Link></li>
         <li><Link to="/transportation">Transportation</Link></li>
@@ -15,3 +18,5 @@ function Navbar() {
 }
 
 export default Navbar;
+
+/* "/Users/riadhingra/Work/IrvineHacks/Travel-App-IH25/ziptrip.png" */

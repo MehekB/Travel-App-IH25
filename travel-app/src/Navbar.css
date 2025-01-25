@@ -9,12 +9,6 @@
     margin: 1%;
   }
   
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-left: 2%;
-  }
-  
   .nav-links {
     list-style: none;
     display: flex;
@@ -32,4 +26,22 @@
   
   .nav-links li a:hover {
     color: #8da7fd;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: #333;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    
+  }
+
+  .logo-image {
+    width: 100px;
+    height: 1--px;
+    margin-right: 10px;
   }
