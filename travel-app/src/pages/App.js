@@ -11,14 +11,19 @@ function Home() {
   const [currentLocation, setCurrentLocation] = useState('');
   const [activityType, setActivityType] = useState('');
   const [travelTime, setTravelTime] = useState('');
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); 
 
   const handleSearch = () => {
+    setLoading(true);
+
+    setTimeout(() => {
     console.log("Search clicked!");
     console.log("Location:", currentLocation);
     console.log("Activity Type:", activityType);
     console.log("Travel Time:", travelTime);
 
+    setLoading(false);
     navigate('/results', {
       state: {
         location: currentLocation,
@@ -26,17 +31,23 @@ function Home() {
         time: travelTime,
       },
     });
+  }, 3000);
     // Add logic here to perform the search (e.g., API call or navigation)
   };
 
   return (
     <div>
-      <h1 className="header">What do you want to do today?</h1>
-      
-      <div className="search-bar">
+      <h1 className="header">Ready to explore? Let's make it happen!</h1>
+      {loading ? (
+        <div className="loading-container">
+          <div className="loader"></div>
+          <p className="loading-text"> Finding the best spots...</p>
+        </div>
+      ) : (
+        <div className="search-bar">
         {/* Location Input */}
         <div>
-          <label htmlFor="location">Location:</label>
+          <label htmlFor="location">📍Location:</label>
           <input
             id="location"
             type="text"
@@ -48,7 +59,7 @@ function Home() {
 
         {/* Activity Type Dropdown */}
         <div>
-          <label htmlFor="activityType">Type of Activity:</label>
+          <label htmlFor="activityType">🎯 Type of Activity:</label>
           <select
             id="activityType"
             value={activityType}
@@ -67,7 +78,7 @@ function Home() {
 
         {/* Travel Time Input */}
         <div>
-          <label htmlFor="travelTime">Time of Travel:</label>
+          <label htmlFor="travelTime">⏰ Time of Travel:</label>
           <input
             id="travelTime"
             type="time"
@@ -81,7 +92,7 @@ function Home() {
           <button onClick={handleSearch}>Search</button>
         </div>
       </div>
-
+      )}
     </div>
   );
 }
