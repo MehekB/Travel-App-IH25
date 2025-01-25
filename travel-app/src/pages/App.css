@@ -1,42 +1,9 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  background-color: #eff4ff;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #dcb9ff;
-  border-radius: 30px;
-  padding: 0.5%;
-  color: rgb(254, 254, 254);
-  margin: 1%;
-}
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-left: 2%;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-  margin-right: 2%;
-  padding: 0;
-}
-
-.nav-links li a {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-}
-
-.nav-links li a:hover {
-  color: #8c00ff;
-}
 
 

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #dcb9ff;
+    background-color: #8eb0f9; /* #acc4f7 */
     border-radius: 30px;
     padding: 0.5%;
     color: rgb(254, 254, 254);
@@ -31,5 +31,5 @@
   }
   
   .nav-links li a:hover {
-    color: #8c00ff;
+    color: #8da7fd;
   }
