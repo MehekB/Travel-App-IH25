@@ -68,10 +68,10 @@ function Home() {
             <option value="" disabled>
               Select an activity
             </option>
-            <option value="eating">Eating</option>
+            <option value="food">Food</option>
             <option value="shopping">Shopping</option>
             <option value="coffee">Coffee</option>
-            <option value="nature">Nature</option>
+            <option value="park">Parks</option>
             <option value="nightlife">Nightlife</option>
           </select>
         </div>
