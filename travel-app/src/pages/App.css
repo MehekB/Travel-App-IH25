@@ -4,6 +4,49 @@ body {
   background-color: #eff4ff;
 }
 
+.header {
+  margin-left: 3%;
+  margin-top: 3%;
+}
 
+.search-bar {
+  display: flex;
+  align-items: center; /* Vertically center all elements */
+  justify-content: 5%; /* Distribute items with spacing */
+  gap: 1rem; /* Add spacing between inputs */
+  margin-left: 3%; /* Add some space around the search bar */
+  flex-wrap: wrap; /* Wrap items to the next row if they don’t fit */
+}
 
+.search-bar input, 
+.search-bar select, 
+.search-bar button {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+}
 
+.search-bar button {
+  background-color: #8eb0f9;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+} 
+
+.search-bar button:hover {
+  background-color: #8eb0f9;
+}
+
+.search-bar input, 
+.search-bar select {
+  flex: 1; /* Inputs and dropdown share equal space */
+  min-width: 150px; /* Minimum width to prevent items from getting too small */
+}
+
+.search-bar button {
+  flex: 0; /* Button takes only the space it needs */
+  padding: 0.5rem 1rem; /* Add some padding for the button */
+}
