@@ -19,6 +19,8 @@ function Home() {
   const [visibleResultsCount, setVisibleResultsCount] = useState(5); // Number of results to display
   const navigate = useNavigate();
 
+  const MAPBOX_ACCESS_TOKEN = process.env.MAPBOX_API_KEY;
+
 
   const handleCheckboxChange = (activity) => {
     setSelectedActivities((prevSelected) => {
@@ -41,7 +43,6 @@ function Home() {
 
   // Results Logic
   const fetchResults = async (location, activity) => {
-    const MAPBOX_ACCESS_TOKEN = "pk.eyJ1IjoibWVoZWtiIiwiYSI6ImNtNmJ4MnNldjBjdDcycW9uaHprYzVwZTgifQ.R85l-MzGDtVM4N-Srd01Ig";
 
     const fetchCoordinates = async (location) => {
       const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(location)}.json?access_token=${MAPBOX_ACCESS_TOKEN}&limit=1`;
@@ -75,7 +76,7 @@ function Home() {
       if (!longitude || !latitude) return []; // If coordinates are not found, exit
 
       // Construct the URL for POI search with proximity
-      const url = `${baseUrl}/${encodedActivity}?access_token=pk.eyJ1IjoibWVoZWtiIiwiYSI6ImNtNmJ4MnNldjBjdDcycW9uaHprYzVwZTgifQ.R85l-MzGDtVM4N-Srd01Ig&language=en&limit=25&proximity=${longitude},${latitude}`;
+      const url = `${baseUrl}/${encodedActivity}?access_token=${MAPBOX_ACCESS_TOKEN}&language=en&limit=25&proximity=${longitude},${latitude}`;
 
       console.log("Fetching URL:", url);
 
@@ -173,7 +174,7 @@ function Home() {
       <h1 className="header">Ready to explore? Let's make it happen!</h1>
       {loading ? (
         <div className="loading-container">
-          <p className="loading-text"> Finding the best spots...</p>
+          <p className="loading-text"> Finding you the best spots...</p>
           <div className="loading-spinner"></div> 
         </div>
       ) : (

@@ -6,17 +6,19 @@ import './Itinerary.css';
 const ai_generate = async (activities, startTime) => {
     const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-    const genAI = new GoogleGenerativeAI("AIzaSyBsW0izPoEQ8cHLc0mveXQfCk6gjlf7gtg");
+    const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+    const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const locations = activities.map(activity => `${activity.name} at ${activity.address}`).join(", ");
     console.log(locations);
+    console.log(startTime);
     const prompt = `Please create a detailed itinerary for the following activities, starting at ${startTime}. List each activity with the time range and activity description, without additional commentary. Prioritize proximity to minimize travel time between activities.
 
     Format the response like this:
 
-    12:00 PM - 1:00 PM: Activity Name (Location)
-    1:00 PM - 2:00 PM: Activity Name (Location)
+    [${startTime}] - [end time]: Activity Name (Location)
+    5:00 PM - 6:00 PM: Activity Name (Location)
     ...and so on.
 
     Make sure it starts at the given start time. Do not include any extra explanations or details. Not even notes.
