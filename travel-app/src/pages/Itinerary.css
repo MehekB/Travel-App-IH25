@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+
 .header {
     margin-top: 3%;
+    font-family: 'Patrick Hand', cursive;
 }
 
 .image-container {
@@ -17,17 +21,28 @@
 
 .text-overlay {
     position: absolute; /* Allows text to be positioned on top of the image */
-    top: 9%;
+    top: 7.5%;
     left: 32.5%;
     font-size: 1.4rem; /* Adjust font size as needed */
     font-weight: bold;
     z-index: 1;
     max-width: 30%;
+    font-family: 'Patrick Hand', cursive;
 }
 
 .itinerary-list {
     margin-top: 3.8%;
     line-height: 2.5;
     font-size: 75%;
-    
+}
+
+.pdf-button {
+    margin: 2%;
+    background-color: #8eb0f9;
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }

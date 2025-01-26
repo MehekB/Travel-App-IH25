@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom"; // To access passed data
+import { useLocation } from "react-router-dom";
+import { jsPDF } from "jspdf";
 import './Itinerary.css';
 
 
@@ -53,6 +54,29 @@ function Itinerary () {
         }
     }, [activities, startTime]);
 
+    // Function to generate PDF
+    const handleSaveAsPDF = () => {
+        const doc = new jsPDF();
+
+        // Add title
+        doc.setFontSize(18);
+        doc.text("Your Custom Itinerary", 10, 10);
+
+        // Add itinerary
+        doc.setFontSize(12);
+        if (itinerary) {
+            const lines = itinerary.split('\n').filter(line => line.trim() !== '');
+            lines.forEach((line, index) => {
+                doc.text(line, 10, 20 + index * 10);
+            });
+        } else {
+            doc.text("Loading your itinerary...", 10, 20);
+        }
+
+        // Save PDF
+        doc.save("itinerary.pdf");
+    };
+
     return (
         <div>
             <h1 className='header'>
@@ -70,6 +94,9 @@ function Itinerary () {
                         )}
                     </ol>
                 </div>
+                <center><button onClick={handleSaveAsPDF} className="pdf-button">
+                        Save as PDF
+                </button></center>
             </div>
         </div>
     );
