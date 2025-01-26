@@ -1,5 +1,11 @@
 function Transportation() {
-    return <h2>Transportation</h2>;
+    return (
+      <div>
+         <h1 className="header">Transportation</h1>
+         <p className="text">Coming soon...</p>
+
+      </div>
+    )
   }
   
   export default Transportation;
