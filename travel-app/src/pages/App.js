@@ -180,7 +180,7 @@ function Home() {
 
   return (
     <div>
-      <h1 className="header">Ready to explore? Let's make it happen!</h1>
+      <h1 className="header">What's on your bucket list for the day?</h1>
       {loading ? (
         <div className="loading-container">
           <p className="loading-text"> Finding you the best spots...</p>
@@ -266,7 +266,7 @@ function Home() {
             ))}
           </ul>
           {visibleResultsCount < results.length && (
-            <button onClick={handleGenerateMoreIdeas}>
+            <button className="generate-more-button" onClick={handleGenerateMoreIdeas}>
               Generate More Ideas
             </button>
           )}

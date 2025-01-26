@@ -177,8 +177,42 @@ body {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+  
 }
 
 .generate-itinerary-button:hover {
   background-color: #8eb0f9;
+}
+
+.generate-itinerary-button {
+  flex: 0; /* Button takes only the space it needs */
+  padding: 0.5rem 1rem; /* Add some padding for the button */
+}
+
+.generate-more-button {
+  background-color: #8eb0f9;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+  
+}
+
+.generate-more-button:hover {
+  background-color: #8eb0f9;
+}
+
+.generate-more-button {
+  flex: 0; /* Button takes only the space it needs */
+  padding: 0.5rem 1rem; /* Add some padding for the button */
 }
