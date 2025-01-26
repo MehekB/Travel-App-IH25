@@ -18,6 +18,7 @@ function Home() {
   const [selectedActivities, setSelectedActivities] = useState([]);
 
   const handleCheckboxChange = (activityID) => {
+    console.log("Activity ID: ", activityID);
     setSelectedActivities((prevSelected) =>
       prevSelected.includes(activityID)
       ? prevSelected.filter((id) => id !== activityID)
@@ -80,7 +81,7 @@ function Home() {
                 address: feature.properties.full_address,
                 category: feature.properties.poi_category?.join(", ") || "N/A",
                 distance: calculateDistance(longitude, latitude, feature.geometry.coordinates[0], feature.geometry.coordinates[1]),
-                id: feature.properties.id, // Unique id for each place
+                id: feature.properties.id || feature.properties.name,
               };
               return poi;
             });
@@ -209,13 +210,16 @@ function Home() {
         <div className="results">
           <h2>Results:</h2>
           <ul>
-            {results.map((result) => (
-              <li key={results.id}>
+            {results.map((result, index) => (
+              <li key={`${result.id}-${index}`}>
                 <label>
                   <input
                     type="checkbox"
-                    checked={selectedActivities.includes(results.id)}
-                    onChange= {() => handleCheckboxChange(results.id)}
+                    checked={selectedActivities.includes(result.id)}
+                    onChange= {() => {
+                      console.log("Selected activity ID:", result.id);  // Log result.id here
+                      handleCheckboxChange(result.id);
+                    }}
                   />
                   <span>
                     <strong>{result.name}</strong> - {result.address} (
