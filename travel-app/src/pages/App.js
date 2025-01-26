@@ -14,16 +14,26 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); 
   const [selectedActivities, setSelectedActivities] = useState([]);
+  const [visibleResultsCount, setVisibleResultsCount] = useState(5); // Number of results to display
 
-  const handleCheckboxChange = (activityID) => {
-    console.log("Activity ID: ", activityID);
-    setSelectedActivities((prevSelected) =>
-      prevSelected.includes(activityID)
-      ? prevSelected.filter((id) => id !== activityID)
-      : [...prevSelected, activityID]
-    );
+
+  const handleCheckboxChange = (activity) => {
+    setSelectedActivities((prevSelected) => {
+      // Check if the activity with the same id already exists
+      const isActivitySelected = prevSelected.some(
+        (selectedActivity) => selectedActivity.id === activity.id
+      );
+  
+      // If it doesn't exist, add it; otherwise, remove it
+      if (isActivitySelected) {
+        return prevSelected.filter(
+          (selectedActivity) => selectedActivity.id !== activity.id
+        );
+      } else {
+        return [...prevSelected, activity]; // Add the new activity to the list
+      }
+    });
   };
 
 
@@ -63,7 +73,7 @@ function Home() {
       if (!longitude || !latitude) return []; // If coordinates are not found, exit
 
       // Construct the URL for POI search with proximity
-      const url = `${baseUrl}/${encodedActivity}?access_token=pk.eyJ1IjoibWVoZWtiIiwiYSI6ImNtNmJ4MnNldjBjdDcycW9uaHprYzVwZTgifQ.R85l-MzGDtVM4N-Srd01Ig&language=en&limit=5&proximity=${longitude},${latitude}`;
+      const url = `${baseUrl}/${encodedActivity}?access_token=pk.eyJ1IjoibWVoZWtiIiwiYSI6ImNtNmJ4MnNldjBjdDcycW9uaHprYzVwZTgifQ.R85l-MzGDtVM4N-Srd01Ig&language=en&limit=25&proximity=${longitude},${latitude}`;
 
       console.log("Fetching URL:", url);
 
@@ -72,7 +82,7 @@ function Home() {
         const response = await fetch(url);
         const data = await response.json();
 
-        if (response.ok) {
+        if (response.ok && data.features) {
           console.log("Nearby POIs:", data);
           if (data.features && data.features.length > 0) {
             return data.features.map((feature) => {
@@ -81,7 +91,7 @@ function Home() {
                 address: feature.properties.full_address,
                 category: feature.properties.poi_category?.join(", ") || "N/A",
                 distance: calculateDistance(longitude, latitude, feature.geometry.coordinates[0], feature.geometry.coordinates[1]),
-                id: feature.properties.id || feature.properties.name,
+                id: feature.properties.id || feature.geometry.coordinates,
               };
               return poi;
             });
@@ -128,8 +138,6 @@ function Home() {
 
   }
 
-
-
   const handleSearch = () => {
     setLoading(true);
 
@@ -140,9 +148,17 @@ function Home() {
     console.log("Travel Time:", travelTime);
 
     setLoading(false);
+    setVisibleResultsCount(5);
     setResults(fetchResults(currentLocation, activityType));
   }, 3000);
-    // Add logic here to perform the search (e.g., API call or navigation)
+  };
+
+  const handleGenerateMoreIdeas = () => {
+    setVisibleResultsCount((prevCount) => prevCount + 5);
+  };
+
+  const handleGenerateItinerary = () => {
+    
   };
 
   return (
@@ -210,15 +226,15 @@ function Home() {
         <div className="results">
           <h2>Results:</h2>
           <ul>
-            {results.map((result, index) => (
+          {results.slice(0, visibleResultsCount).map((result, index) => (
               <li key={`${result.id}-${index}`}>
                 <label>
                   <input
                     type="checkbox"
-                    checked={selectedActivities.includes(result.id)}
+                    checked={selectedActivities.some(activity => activity.id === result.id)}
                     onChange= {() => {
                       console.log("Selected activity ID:", result.id);  // Log result.id here
-                      handleCheckboxChange(result.id);
+                      handleCheckboxChange(result);
                     }}
                   />
                   <span>
@@ -229,11 +245,17 @@ function Home() {
               </li>
             ))}
           </ul>
+          {visibleResultsCount < results.length && (
+            <button onClick={handleGenerateMoreIdeas}>
+              Generate More Ideas
+            </button>
+          )}
           <p>
-            You Selected: {selectedActivities.length}{' '}
+            You Selected -- {selectedActivities.length}{' '}
             {selectedActivities.length === 1 ? 'activity' : 'activities'}
-            Selected Activities: {selectedActivities}
+            : {selectedActivities.map((activity) => activity.name).join(', ')}
           </p>
+          <button onClick={handleGenerateItinerary}>Generate Itinerary</button>
           </div>
       )}
 
