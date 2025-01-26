@@ -119,7 +119,9 @@ function Home() {
       const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-      return R * c; // Distance in meters
+      const distanceInMeters = R * c;
+      const distanceInMiles = distanceInMeters / 1609.344;
+      return distanceInMiles.toFixed(2); // Distance in meters
     };
 
     try {
@@ -227,8 +229,7 @@ function Home() {
           <h2>Results:</h2>
           <ul>
           {results.slice(0, visibleResultsCount).map((result, index) => (
-              <li key={`${result.id}-${index}`}>
-                <label>
+              <li key={`${result.id}-${index}`} className="result-item">
                   <input
                     type="checkbox"
                     checked={selectedActivities.some(activity => activity.id === result.id)}
@@ -237,10 +238,14 @@ function Home() {
                       handleCheckboxChange(result);
                     }}
                   />
-                  <span>
-                    <strong>{result.name}</strong> - {result.address} (
-                      {result.distance} meters away)
-                  </span>
+                   <label>
+                    <span className="place-name">{result.name}</span>
+                    <span className="place-address">
+                      <span role="img" aria-label="location pin">📍</span> {result.address}
+                    </span>
+                    <span className="place-distance">
+                      <span role="img" aria-label="distance">🚘</span> {result.distance} miles
+                    </span> 
                 </label>
               </li>
             ))}

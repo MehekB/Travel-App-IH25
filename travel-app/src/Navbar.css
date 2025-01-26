@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap');
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -21,8 +23,10 @@
   .nav-links li a {
     color: white;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.08rem;
     transition: color 0.3s ease;
+    font-family: coming soon, cursive;
+    text-shadow: 0.5px 0.5px 0 black;
   }
   
   .nav-links li a:hover {
@@ -45,4 +49,5 @@
     width: 7%;
     height: 1--px;
     margin-right: 10px;
+    margin-left: 15px;
   }
