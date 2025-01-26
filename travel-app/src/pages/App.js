@@ -6,6 +6,7 @@ import './App.css';
 import About from './About';
 import Results from './Results';
 import Transportation from './Transportation';
+import Itinerary from './Itinerary';
 
 function Home() {
   const [currentLocation, setCurrentLocation] = useState('');
@@ -16,6 +17,7 @@ function Home() {
   const [error, setError] = useState(null);
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [visibleResultsCount, setVisibleResultsCount] = useState(5); // Number of results to display
+  const navigate = useNavigate();
 
 
   const handleCheckboxChange = (activity) => {
@@ -160,6 +162,9 @@ function Home() {
   };
 
   const handleGenerateItinerary = () => {
+    navigate("/itinerary", {
+      state: { selectedActivities, travelTime } // Pass selected activities to the Itinerary page
+    });
     
   };
 
@@ -280,6 +285,7 @@ function App() {
           <Route path="/results" element={<Results />} />
           <Route path="/transportation" element={<Transportation />} />
           <Route path="/about" element={<About />} />
+          <Route path="/itinerary" element={<Itinerary />}/>
         </Routes>
       </div>
     </Router>

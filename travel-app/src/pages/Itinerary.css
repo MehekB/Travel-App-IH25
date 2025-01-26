@@ -17,14 +17,17 @@
 
 .text-overlay {
     position: absolute; /* Allows text to be positioned on top of the image */
-    top: 11%;
-    left: 33%;
-    font-size: 1.5rem; /* Adjust font size as needed */
+    top: 9%;
+    left: 32.5%;
+    font-size: 1.4rem; /* Adjust font size as needed */
     font-weight: bold;
     z-index: 1;
+    max-width: 30%;
 }
 
 .itinerary-list {
     margin-top: 3.8%;
-    line-height: 1.6;
+    line-height: 2.5;
+    font-size: 75%;
+    
 }
