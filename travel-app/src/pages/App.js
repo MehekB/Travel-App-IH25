@@ -275,7 +275,7 @@ function Home() {
             {selectedActivities.length === 1 ? 'activity' : 'activities'}
             : {selectedActivities.map((activity) => activity.name).join(', ')}
           </p>
-          <button onClick={handleGenerateItinerary}>Generate Itinerary</button>
+          <button className="generate-itinerary-button" onClick={handleGenerateItinerary}>Generate Itinerary</button>
           </div>
       )}
 
