@@ -11,7 +11,7 @@ const ai_generate = async (activities, startTime) => {
 
     const locations = activities.map(activity => `${activity.name} at ${activity.address}`).join(", ");
     console.log(locations);
-    const prompt = `Please create a detailed itinerary for the following activities, starting at ${startTime} in Irvine, California. List each activity with the time range and activity description, without additional commentary. Prioritize proximity to minimize travel time between activities.
+    const prompt = `Please create a detailed itinerary for the following activities, starting at ${startTime}. List each activity with the time range and activity description, without additional commentary. Prioritize proximity to minimize travel time between activities.
 
     Format the response like this:
 
@@ -19,7 +19,7 @@ const ai_generate = async (activities, startTime) => {
     1:00 PM - 2:00 PM: Activity Name (Location)
     ...and so on.
 
-    Do not include any extra explanations or details.
+    Do not include any extra explanations or details. Not even notes.
 
     Activities: ${locations}
     `;
