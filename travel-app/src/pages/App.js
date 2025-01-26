@@ -15,6 +15,16 @@ function Home() {
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate(); 
+  const [selectedActivities, setSelectedActivities] = useState([]);
+
+  const handleCheckboxChange = (activityID) => {
+    setSelectedActivities((prevSelected) =>
+      prevSelected.includes(activityID)
+      ? prevSelected.filter((id) => id !== activityID)
+      : [...prevSelected, activityID]
+    );
+  };
+
 
   // Results Logic
   const fetchResults = async (location, activity) => {
@@ -139,8 +149,8 @@ function Home() {
       <h1 className="header">Ready to explore? Let's make it happen!</h1>
       {loading ? (
         <div className="loading-container">
-          <div className="loader"></div>
           <p className="loading-text"> Finding the best spots...</p>
+          <div className="loading-spinner"></div> 
         </div>
       ) : (
         <div className="search-bar">
@@ -196,7 +206,30 @@ function Home() {
 
       {/* Render Results Component with Data */}
       {results.length > 0 && !loading && (
-        <Results location={currentLocation} activity={activityType} time={travelTime} results={results} />
+        <div className="results">
+          <h2>Results:</h2>
+          <ul>
+            {results.map((result) => (
+              <li key={results.id}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={selectedActivities.includes(results.id)}
+                    onChange= {() => handleCheckboxChange(results.id)}
+                  />
+                  <span>
+                    <strong>{result.name}</strong> - {result.address} (
+                      {result.distance} meters away)
+                  </span>
+                </label>
+              </li>
+            ))}
+          </ul>
+          <p>
+            You Selected: {selectedActivities.length}{' '}
+            {selectedActivities.length === 1 ? 'activity' : 'activities'}
+          </p>
+          </div>
       )}
 
       {/* Display Error Message */}
