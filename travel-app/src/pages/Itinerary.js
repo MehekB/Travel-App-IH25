@@ -6,7 +6,7 @@ import './Itinerary.css';
 const ai_generate = async (activities, startTime) => {
     const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-    const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+    const apiKey = process.env.REACT_APP_GOOGLE_GENERATIVE_AI_API_KEY;
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
@@ -35,23 +35,23 @@ function Itinerary () {
     const location = useLocation();
     const [itinerary, setItinerary] = useState(null);
     const activities = location.state?.selectedActivities || [];
+    console.log("startTime rn: ", location.state?.startTime);
+
+    
     const startTime = location.state?.startTime || "12:00 PM";
 
     useEffect(() => {
         const generateItinerary = async () => {
-        const generatedItinerary = await ai_generate(activities, startTime);
-        setItinerary(generatedItinerary);
-        console.log(itinerary);
-    };
-    
-    if (activities.length > 0) {
-      generateItinerary();
-    }
-  }, [activities, startTime]);
-
-    const cleanItinerary = itinerary
-    ? itinerary.split('\n').filter(line => line.trim() !== '').map((line, index) => <li key={index}>{line}</li>)
-    : [];
+          console.log("Start time in Itinerary:", startTime);  // Check this log
+          const generatedItinerary = await ai_generate(activities, startTime);
+          setItinerary(generatedItinerary);
+          console.log(itinerary);
+        };
+        
+        if (activities.length > 0) {
+          generateItinerary();
+        }
+    }, [activities, startTime]);
 
     return (
         <div>

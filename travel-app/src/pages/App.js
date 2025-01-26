@@ -19,7 +19,7 @@ function Home() {
   const [visibleResultsCount, setVisibleResultsCount] = useState(5); // Number of results to display
   const navigate = useNavigate();
 
-  const MAPBOX_ACCESS_TOKEN = process.env.MAPBOX_API_KEY;
+  const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_API_KEY;
 
 
   const handleCheckboxChange = (activity) => {
@@ -43,6 +43,8 @@ function Home() {
 
   // Results Logic
   const fetchResults = async (location, activity) => {
+
+    console.log(MAPBOX_ACCESS_TOKEN);
 
     const fetchCoordinates = async (location) => {
       const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(location)}.json?access_token=${MAPBOX_ACCESS_TOKEN}&limit=1`;
@@ -162,11 +164,18 @@ function Home() {
     setVisibleResultsCount((prevCount) => prevCount + 5);
   };
 
+  const formatTo12HourTime = (time) => {
+    const [hour, minute] = time.split(':');
+    const formattedHour = (hour % 12) || 12; // Adjust hour to 12-hour format
+    const period = hour >= 12 ? 'PM' : 'AM';
+    return `${formattedHour}:${minute} ${period}`;
+  };
+  
   const handleGenerateItinerary = () => {
+    const formattedStartTime = formatTo12HourTime(travelTime);
     navigate("/itinerary", {
-      state: { selectedActivities, travelTime } // Pass selected activities to the Itinerary page
+      state: { selectedActivities, startTime: formattedStartTime }
     });
-    
   };
 
   return (
