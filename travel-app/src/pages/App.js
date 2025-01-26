@@ -232,6 +232,7 @@ function Home() {
           <p>
             You Selected: {selectedActivities.length}{' '}
             {selectedActivities.length === 1 ? 'activity' : 'activities'}
+            Selected Activities: {selectedActivities}
           </p>
           </div>
       )}

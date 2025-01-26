@@ -26,11 +26,11 @@
   }
   
   .nav-links li a:hover {
-    color: #8da7fd;
+    color: #4673d4;
   }
 
   .logo {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
     margin-left: #333;
   }
@@ -42,7 +42,7 @@
   }
 
   .logo-image {
-    width: 100px;
+    width: 7%;
     height: 1--px;
     margin-right: 10px;
   }
