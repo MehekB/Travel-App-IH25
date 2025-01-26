@@ -19,7 +19,7 @@ const ai_generate = async (activities, startTime) => {
     1:00 PM - 2:00 PM: Activity Name (Location)
     ...and so on.
 
-    Do not include any extra explanations or details. Not even notes.
+    Make sure it starts at the given start time. Do not include any extra explanations or details. Not even notes.
 
     Activities: ${locations}
     `;
